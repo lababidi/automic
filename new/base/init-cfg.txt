@@ -1,0 +1,10 @@
+type=static
+ip-address=mgtip
+default-gateway=mgtgateway
+netmask=mgtmask
+hostname=abc
+dns-primary=mgtdns
+panorama-server=pno
+dgname=
+tplname=
+vm-auth-key=panokey

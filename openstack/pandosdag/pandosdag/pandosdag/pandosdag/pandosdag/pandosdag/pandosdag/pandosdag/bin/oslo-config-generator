@@ -1,0 +1,10 @@
+#!/Users/miclark/Downloads/automic/vm/automic/openstack/pandosdag/bin/python
+# EASY-INSTALL-ENTRY-SCRIPT: 'oslo.config==1.9.3','console_scripts','oslo-config-generator'
+__requires__ = 'oslo.config==1.9.3'
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.exit(
+        load_entry_point('oslo.config==1.9.3', 'console_scripts', 'oslo-config-generator')()
+    )

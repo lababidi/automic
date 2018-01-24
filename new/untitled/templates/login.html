@@ -1,0 +1,71 @@
+<link rel="stylesheet" href="/static/style.css" type="text/css">
+{% block body %}
+{% if session['logged_in'] %}
+<p>You're logged in already!</p>
+{% else %}
+  <header>
+    <meta charset="utf-8">
+    <title>Configuration Maker</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/pan-logo-badge-green-dark-kick-up.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='css/bootstrap1.css') }}">
+    <style>
+      body {
+        padding-top: 30px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+   <header/>
+    <div class="navbar navbar-inverse navbar-static-top>
+      <br>
+      <br>
+<a href="/"><img src="" alt="" width="150" height="110" class="img-thumbnail img-responsive" align="left"/></a>
+      <div class="navbar-inner">
+      <div class="navbar-inner">
+         <a href="/"></a>
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+ <div class="container">
+          <div class="row">
+          <div class="col-xs-12">
+              <h1 class="text-center" color="white">Automic Automation</h1>
+          <right></right>
+          </div>
+        </div>
+      </div>
+<form action="/login" method="POST">
+	<div class="login">
+		<div class="login-screen">
+			<div class="app-title">
+				<h1>Login</h1>
+			</div>
+ 
+			<div class="login-form">
+				<div class="control-group">
+				<input type="text" class="login-field" value="" placeholder="username" name="username" style="height: 35px;" >
+				<label class="login-field-icon fui-user" for="login-name"></label>
+				</div>
+ 
+				<div class="control-group">
+				<input type="password" class="login-field" value="" placeholder="password" name="password" style="height: 35px;">
+				<label class="login-field-icon fui-lock" for="login-pass"></label>
+				</div>
+                         <br>
+ 
+                <input type="submit" value="Login" class="btn btn-primary1 btn-large btn-block" >
+			    <br>
+			</div>
+                 </div>
+	</div>
+</form>
+</div>
+</div>
+</div>
+<center>  <a href="/"><img src="/static/pan-logo-badge-green-dark-kick-up.png" alt="" style="width:400px;height:300px;"  width="400" height="300" class="img-thumbnail img-responsive" align="center"/></a></center>
+{% endif %}
+{% endblock %}

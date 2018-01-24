@@ -1,0 +1,10 @@
+type=static
+ip-address=192.168.1.5
+default-gateway=192.168.1.6
+netmask=255.255.255.0
+hostname=abc
+dns-primary=4.2.2.6
+panorama-server=2.3.2.3
+dgname=
+tplname=
+vm-auth-key=asd14434

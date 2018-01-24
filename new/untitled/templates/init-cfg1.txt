@@ -1,0 +1,6 @@
+type=static
+ip-address=mgtip
+default-gateway=mgtgateway
+netmask=mgtmask
+hostname=abc
+dns-primary=mgtdns

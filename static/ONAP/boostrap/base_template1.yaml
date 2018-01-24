@@ -1,0 +1,138 @@
+heat_template_version: 2014-10-16
+#Michael Clark Palo Alto Networks 
+description: OpenECOMP
+
+parameters:
+   fw_name_0:
+     type: comma_delimited_list
+     description: VM Names for fw VMs
+     default: PA-VNF
+
+   vnf_name:
+     type: string
+     description: Unique name for this VNF instance    
+     default: 
+   vnf_id:
+      type: string
+      description: Unique ID for this VNF instance
+      default:
+
+   vf_module_name:
+      type: string
+      description: Unique name for this VNF Module instance
+      default:
+
+   vf__module_id:
+      type: string
+      description: Unique ID for this VNF Module instance
+      default:
+
+   fw_availability_zone_0:
+     type: string
+     default:   
+ 
+   fw_image:
+     type: string
+     default: 
+     
+   fw_flavor:
+     type: string
+     default: 
+     
+   oam_net_name:
+     type: string
+     default: 
+
+   oam_subnet_name:
+     type: string
+     default: IPV4
+     
+   ext_net_name:
+     type: string
+     default: 
+     
+   ext_subnet_name:
+     type: string
+     default: 
+     
+   int_net_name:
+     type: string
+     default: 
+     
+   int_subnet_name:
+     type: string
+     default: 
+
+   fw_oam_ip_0:
+     type: string
+     default: 
+     
+   fw_ext_ip_0:
+     type: string
+     default: 
+     
+   fw_int_ip_0:
+     type: string
+     default: 
+     
+   oam_security_group:
+     type: string
+     default: default
+
+   ext_security_group:
+     type: string
+     default: default
+
+   int_security_group:
+     type: string
+     default: default
+
+resources:
+   fw_oam_port_0:
+      type: OS::Neutron::Port
+      properties:
+          name: "management"
+          network: { get_param: oam_net_name }          
+          fixed_ips: [{"subnet": { get_param: oam_subnet_name }, "ip_address": { get_param: fw_oam_ip_0 }}]
+          security_groups: [{ get_param: oam_security_group }]
+   fw_ext_port_0:
+      depends_on: management
+      type: OS::Neutron::Port
+      properties:
+          name: "outside"          
+          network: { get_param: ext_net_name }          
+          fixed_ips: [{"subnet": { get_param: ext_subnet_name }, "ip_address": { get_param: ext_ip_name_0 }}]
+          security_groups: [{ get_param: ext_security_group }]
+      
+   fw_int_port_0:
+     depends_on: outside
+     type: OS::Neutron::Port
+     properties:
+         name: "outside"
+         network: { get_param: int_net_name }          
+         fixed_ips: [{"subnet": { get_param: int_subnet_name }, "ip_address": { get_param: fw_int_ip_0 }}]
+         security_groups: [{ get_param: int_security_group }]
+      
+   fw_0:
+      type: OS::Nova::Server
+      properties:
+          metadata:
+              vnf_name: { get_param: vnf_name }
+              vnf_id: { get_param: vnf_id }
+              vf_module_name: { get_param: vf_module_name }
+              vf_module_id: { get_param: vf_module_id }
+          name: { get_param: fw_name_0 }
+          image: { get_param: fw_image }
+          flavor: { get_param: fw_flavor }
+          availability_zone_0: { get_param: fw_availability_zone_0 }
+          networks:
+          - port: { get_resource: fw_oam_port_0 }
+          - port: { get_resource: fw_ext_port_0 }
+          - port: { get_resource: fw_int_port_0 }
+
+          user_data_format: RAW
+          config_drive: true
+          personality:
+            /config/init-cfg.txt: {get_file: "init-cfg.txt"}
+            /config/bootstrap.xml: {get_file: "bootstrap.xml"}
+            /license/authcodes: {get_file: "authcodes"}

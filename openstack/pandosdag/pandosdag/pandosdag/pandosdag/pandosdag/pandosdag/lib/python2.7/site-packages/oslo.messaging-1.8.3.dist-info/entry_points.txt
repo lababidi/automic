@@ -1,0 +1,33 @@
+[console_scripts]
+oslo-messaging-zmq-receiver = oslo_messaging._cmd.zmq_receiver:main
+
+[oslo.config.opts]
+oslo.messaging = oslo_messaging.opts:list_opts
+
+[oslo.messaging.drivers]
+amqp = oslo_messaging._drivers.protocols.amqp.driver:ProtonDriver
+fake = oslo_messaging._drivers.impl_fake:FakeDriver
+kombu = oslo_messaging._drivers.impl_rabbit:RabbitDriver
+qpid = oslo_messaging._drivers.impl_qpid:QpidDriver
+rabbit = oslo_messaging._drivers.impl_rabbit:RabbitDriver
+zmq = oslo_messaging._drivers.impl_zmq:ZmqDriver
+
+[oslo.messaging.executors]
+aioeventlet = oslo_messaging._executors.impl_aioeventlet:AsyncioEventletExecutor
+blocking = oslo_messaging._executors.impl_blocking:BlockingExecutor
+eventlet = oslo_messaging._executors.impl_eventlet:EventletExecutor
+threading = oslo_messaging._executors.impl_thread:ThreadExecutor
+
+[oslo.messaging.notify.drivers]
+log = oslo_messaging.notify._impl_log:LogDriver
+messaging = oslo_messaging.notify._impl_messaging:MessagingDriver
+messagingv2 = oslo_messaging.notify._impl_messaging:MessagingV2Driver
+noop = oslo_messaging.notify._impl_noop:NoOpDriver
+routing = oslo_messaging.notify._impl_routing:RoutingDriver
+test = oslo_messaging.notify._impl_test:TestDriver
+
+[oslo.messaging.zmq.matchmaker]
+local = oslo_messaging._drivers.matchmaker:MatchMakerLocalhost
+redis = oslo_messaging._drivers.matchmaker_redis:MatchMakerRedis
+ring = oslo_messaging._drivers.matchmaker_ring:MatchMakerRing
+

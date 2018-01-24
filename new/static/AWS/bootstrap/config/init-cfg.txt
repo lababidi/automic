@@ -1,0 +1,6 @@
+type=static
+ip-address=
+default-gateway=
+netmask=
+hostname=abc
+dns-primary=

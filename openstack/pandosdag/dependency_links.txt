@@ -1,0 +1,2 @@
+git+https://github.com/openstack/python-keystoneclient.git@stable/newton#egg=python-keystoneclient
+git+https://github.com/openstack/python-neutronclient.git@stable/newton#egg=python-neutronclient
