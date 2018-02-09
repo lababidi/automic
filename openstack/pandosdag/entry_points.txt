@@ -1,3 +1,0 @@
-[console_scripts]
-panosdag = panosdag.cli:main
-
