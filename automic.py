@@ -52,112 +52,13 @@ def automic():
     return render_template('automicexplosion.html')
 
 
-@APP.route('/juju', methods=['GET'])
-def juju():
-    """redirection to JUJU_GUI website"""
-    return redirect(JU_JU)
-
-
-@APP.route('/automicinitcfg', methods=['GET'])
-def automicinitcfg():
-    """Init-config file"""
-    return render_template('automicinit.html')
-
-
-@APP.route('/ANSIBLE/allowrule', methods=['GET', 'POST'])
-def automicansibleallowrule():
-    """ansible allow rule page"""
-    return render_template(ANSIBLE_ALLOW)
-
-
-@APP.route('/ANSIBLE/denyrule', methods=['GET', 'POST'])
-def automicansibledenyrule():
-    """ansible deny rule page"""
-    return render_template(ANSIBLE_DENY)
-
-
-@APP.route('/ANSIBLE/restart', methods=['GET', 'POST'])
-def automicansiblerestart():
-    """ansible restart page"""
-    return render_template(ANSIBLE_RESTART)
+"""KVM WORKFLOW"""
 
 
 @APP.route('/KVM/automicinitcfg', methods=['GET'])
 def automicinitcfgkvm():
     """kvm initcfg page"""
     return render_template('/KVM/automicinit.html')
-
-
-@APP.route('/Openstack/automicinitcfg', methods=['GET'])
-def automicinitcfgopenstack():
-    """openstack initcfg page"""
-    return render_template('automicinit.html')
-
-
-@APP.route('/ONAP/automicinitcfg', methods=['GET'])
-def automicinitcfgopenecomp():
-    """ONAP initcfg page"""
-    return render_template('/ONAP/automicinit.html')
-
-
-@APP.route('/ESXi/automicinitcfg', methods=['GET'])
-def automicinitcfgesxi():
-    """esxi initcfg page"""
-    return render_template('/ESXi/automicinit.html')
-
-
-@APP.route('/ANSIBLE/automicinitcfg', methods=['GET'])
-def automicinitcfgansible():
-    """ansible landing page"""
-    return render_template('/ANSIBLE/automicinit.html')
-
-
-@APP.route('/azure/automicinitcfg', methods=['GET'])
-def automicinitcfgazure():
-    """azure landing page"""
-    return render_template('automicinit.html')
-
-
-@APP.route('/AWS/automicinitcfg', methods=['GET'])
-def automicinitcfgaws():
-    """AWS initcfg page"""
-    return render_template('automicinit.html')
-
-
-@APP.route('/automicinit', methods=['POST'])
-def automicinit():
-    """initcfg form values"""
-    form = INITCFG(request)
-    if request.method == 'POST':
-
-        with open(INIT_CFG) as infile, \
-                open(INIT_CFG_OUT, 'w') as outfile:
-            for line in infile:
-                for src, target in form.initi.items():
-                    line = line.replace(src, target)
-                outfile.write(line)
-
-        return redirect('/automicbootstrap')
-
-    return render_template('automicboot.html')
-
-
-@APP.route('/ONAP/automicinit', methods=['POST'])
-def automicopenecompinit():
-    """ONAP initcfg form values"""
-    form = INITCFG(request)
-    if request.method == 'POST':
-
-        with open(INIT_CFG) as infile, \
-                open(INIT_CFG_ONAP_OUT, 'w') as outfile:
-            for line in infile:
-                for src, target in form.initi.items():
-                    line = line.replace(src, target)
-                outfile.write(line)
-
-        return redirect('/ONAP/automicbootstrap')
-
-    return render_template('/ONAP/automicboot.html')
 
 
 @APP.route('/KVM/automicinit', methods=['POST'])
@@ -179,6 +80,86 @@ def automicinitkvm():
     return render_template('/KVM/automicboot.html')
 
 
+@APP.route('/KVM/automicbootstrap', methods=['GET'])
+def automicbootstrapkvm():
+    """kvm bootstrap landing page"""
+    return render_template('/KVM/automicboot.html')
+
+
+@APP.route('/KVM/automicboot', methods=['POST'])
+def automicbootkvm():
+    """kvm bootstrap form values"""
+    form = BOOTSTRAP(request)
+
+    if request.method == 'POST':
+
+        with open(BOOTSTRAP_XML) as infile, \
+                open(BOOTSTRAP_XML_KVM_OUT, 'w') as outfile:
+            for line in infile:
+                for src, target in form.booti.items():
+                    line = line.replace(src, target)
+                outfile.write(line)
+
+        return redirect('/KVM/automiclicense')
+    return render_template('/KVM/automiclic.html')
+
+
+@APP.route('/KVM/automiclicense', methods=['GET'])
+def automiclicensekvm():
+    """kvm license landing page"""
+    return render_template('/KVM/automiclic.html')
+
+
+@APP.route('/KVM/automiclic', methods=['POST'])
+def automiclickvm():
+    """kvm license form values"""
+    form = LICENSE(request)
+    iso = iso_builder
+    if request.method == 'POST':
+
+        with open(AUTH_CODE_KVM_OUT, 'w') as ini:
+            ini.write(form.li)
+            ini.flush()
+        iso.iso_builder_kvm()
+
+        time.sleep(3)
+        return redirect('/KVM/automicpackage')
+    return render_template('/KVM/automicpkg.html')
+
+
+@APP.route('/static/bootstrap-archive-kvm.iso', methods=['GET', 'POST'])
+def downloadkvm():
+    """kvm download link"""
+    return send_from_directory(APP.static_folder, filename='bootstrap-archive-kvm.iso')
+
+
+@APP.route('/KVM/automicpackage', methods=['GET'])
+def automicpackagekvm():
+    """KVM download page"""
+    return render_template('/KVM/automicexplosionpkg.html')
+
+
+@APP.route('/Openstack/automicinitcfg', methods=['GET'])
+def automicinitcfgopenstack():
+    """openstack initcfg page"""
+    return render_template('automicinit.html')
+
+
+@APP.route('/ONAP/automicinitcfg', methods=['GET'])
+def automicinitcfgopenecomp():
+    """ONAP initcfg page"""
+    return render_template('/ONAP/automicinit.html')
+
+
+"""VMWARE workflow"""
+
+
+@APP.route('/ESXi/automicinitcfg', methods=['GET'])
+def automicinitcfgesxi():
+    """esxi initcfg page"""
+    return render_template('/ESXi/automicinit.html')
+
+
 @APP.route('/ESXi/automicinit', methods=['POST'])
 def automicinitesxi():
     """esxi initcfg form values"""
@@ -198,22 +179,135 @@ def automicinitesxi():
     return render_template('/ESXi/automicboot.html')
 
 
-@APP.route('/ONAP/automicbootstrap', methods=['GET'])
-def automicbootstrapopenecomp():
-    """onap bootstrap landing page"""
-    return render_template('/ONAP/automicboot.html')
-
-
-@APP.route('/KVM/automicbootstrap', methods=['GET'])
-def automicbootstrapkvm():
-    """kvm bootstrap landing page"""
-    return render_template('/KVM/automicboot.html')
-
-
 @APP.route('/ESXi/automicbootstrap', methods=['GET'])
 def automicbootstrapesxi():
     """esxi bootstrap landing page"""
     return render_template('/ESXi/automicboot.html')
+
+
+@APP.route('/ESXi/automicboot', methods=['POST'])
+def automicbootesxi():
+    """esxi bootstrap form values"""
+    form = BOOTSTRAP(request)
+
+    if request.method == 'POST':
+
+        with open(BOOTSTRAP_XML) as infile, \
+                open(BOOTSTRAP_XML_ESXI_OUT, 'w') as outfile:
+            for line in infile:
+                for src, target in form.booti.items():
+                    line = line.replace(src, target)
+                outfile.write(line)
+
+        return redirect('/ESXi/automiclicense')
+    return render_template('/ESXi/automiclic.html')
+
+
+@APP.route('/ESXi/automiclicense', methods=['GET'])
+def automiclicenseesxi():
+    """esxi license landing page"""
+    return render_template('/ESXi/automiclic.html')
+
+
+@APP.route('/ESXi/automiclic', methods=['POST'])
+def automiclicesxi():
+    """esxi license form value"""
+    form = LICENSE(request)
+    iso = iso_builder
+    if request.method == 'POST':
+
+        with open(AUTH_CODE_ESXI_OUT, 'w') as ini:
+            ini.write(form.li)
+            ini.flush()
+        iso.iso_builder_esxi()
+
+        time.sleep(3)
+        return redirect('/ESXi/automicpackage')
+    return render_template('/ESXi/automicexplosionpkg.html')
+
+
+@APP.route('/ESXi/automicpackage', methods=['GET'])
+def automicpackageesxi():
+    """esxi download page"""
+    return render_template('/ESXi/automicexplosionpkg.html')
+
+
+@APP.route('/static/bootstrap-archive-esxi.iso', methods=['GET', 'POST'])
+def downloadesxi():
+    """esxi download link"""
+    return send_from_directory(APP.static_folder, filename='bootstrap-archive-esxi.iso')
+
+
+"""ansible templates"""
+
+
+@APP.route('/ANSIBLE/automicinitcfg', methods=['GET'])
+def automicinitcfgansible():
+    """ansible landing page"""
+    return render_template('/ANSIBLE/automicinit.html')
+
+
+@APP.route('/ANSIBLE/allowrule', methods=['GET', 'POST'])
+def automicansibleallowrule():
+    """ansible allow rule page"""
+    return render_template(ANSIBLE_ALLOW)
+
+
+@APP.route('/ANSIBLE/denyrule', methods=['GET', 'POST'])
+def automicansibledenyrule():
+    """ansible deny rule page"""
+    return render_template(ANSIBLE_DENY)
+
+
+@APP.route('/ANSIBLE/restart', methods=['GET', 'POST'])
+def automicansiblerestart():
+    """ansible restart page"""
+    return render_template(ANSIBLE_RESTART)
+
+
+"""azure workflow"""
+
+
+@APP.route('/azure/automicinitcfg', methods=['GET'])
+def automicinitcfgazure():
+    """azure landing page"""
+    return render_template('automicinit.html')
+
+
+"""AWS workflow"""
+
+
+@APP.route('/AWS/automicinitcfg', methods=['GET'])
+def automicinitcfgaws():
+    """AWS initcfg page"""
+    return render_template('automicinit.html')
+
+
+"""Openstack flow"""
+
+
+@APP.route('/automicinitcfg', methods=['GET'])
+def automicinitcfg():
+    """Init-config file"""
+    return render_template('automicinit.html')
+
+
+@APP.route('/automicinit', methods=['POST'])
+def automicinit():
+    """initcfg form values"""
+    form = INITCFG(request)
+    if request.method == 'POST':
+
+        with open(INIT_CFG) as infile, \
+                open(INIT_CFG_OUT, 'w') as outfile:
+            for line in infile:
+                for src, target in form.initi.items():
+                    line = line.replace(src, target)
+                outfile.write(line)
+
+        return redirect('/automicbootstrap')
+
+    return render_template('automicboot.html')
 
 
 @APP.route('/automicbootstrap', methods=['GET'])
@@ -240,82 +334,10 @@ def automicboot():
     return render_template('automiclic.html')
 
 
-@APP.route('/ONAP/automicboot', methods=['POST'])
-def automicbootopenecomp():
-    """onap bootstrap form values"""
-    form = BOOTSTRAP(request)
-
-    if request.method == 'POST':
-
-        with open(BOOTSTRAP_XML) as infile, \
-                open(BOOTSTRAP_XML_ONAP_OUT, 'w') as outfile:
-            for line in infile:
-                for src, target in form.booti.items():
-                    line = line.replace(src, target)
-                outfile.write(line)
-
-        return redirect('/ONAP/automiclicense')
-    return render_template('/ONAP/automiclic.html')
-
-
-@APP.route('/KVM/automicboot', methods=['POST'])
-def automicbootkvm():
-    """kvm bootstrap form values"""
-    form = BOOTSTRAP(request)
-
-    if request.method == 'POST':
-
-        with open(BOOTSTRAP_XML) as infile, \
-                open(BOOTSTRAP_XML_KVM_OUT, 'w') as outfile:
-            for line in infile:
-                for src, target in form.booti.items():
-                    line = line.replace(src, target)
-                outfile.write(line)
-
-        return redirect('/KVM/automiclicense')
-    return render_template('/KVM/automiclic.html')
-
-
-@APP.route('/ESXi/automicboot', methods=['POST'])
-def automicbootesxi():
-    """esxi bootstrap form values"""
-    form = BOOTSTRAP(request)
-
-    if request.method == 'POST':
-
-        with open(BOOTSTRAP_XML) as infile, \
-                open(BOOTSTRAP_XML_ESXI_OUT, 'w') as outfile:
-            for line in infile:
-                for src, target in form.booti.items():
-                    line = line.replace(src, target)
-                outfile.write(line)
-
-        return redirect('/ESXi/automiclicense')
-    return render_template('/ESXi/automiclic.html')
-
-
 @APP.route('/automiclicense', methods=['GET'])
 def automiclicense():
     """license landing page"""
     return render_template('automiclic.html')
-
-
-@APP.route('/ONAP/automiclicense', methods=['GET'])
-def automiclicenseopenecomp():
-    """onap license landing page"""
-    return render_template('/ONAP/automiclic.html')
-
-
-@APP.route('/KVM/automiclicense', methods=['GET'])
-def automiclicensekvm():
-    """kvm license landing page"""
-    return render_template('/KVM/automiclic.html')
-
-
-@APP.route('/ESXi/automiclicense', methods=['GET'])
-def automiclicenseesxi():
-    """esxi license landing page"""
-    return render_template('/ESXi/automiclic.html')
 
 
 @APP.route('/automiclic', methods=['POST'])
@@ -330,67 +352,6 @@ def automiclic():
             ini.flush()
         return redirect('/automicheattemplate')
     return render_template('automicheat.html')
-
-
-@APP.route('/ONAP/automiclic', methods=['POST'])
-def automiclicopenecomp():
-    """onap license form values"""
-
-    form = LICENSE(request)
-
-    if request.method == 'POST':
-
-        with open(AUTH_CODE_ONAP_OUT, 'w') as ini:
-            ini.write(form.li)
-            ini.flush()
-        return redirect('/ONAP/automicheattemplate')
-    return render_template('/ONAP/automicheat.html')
-
-
-@APP.route('/KVM/automiclic', methods=['POST'])
-def automiclickvm():
-    """kvm license form values"""
-    form = LICENSE(request)
-    iso = iso_builder
-    if request.method == 'POST':
-
-        with open(AUTH_CODE_KVM_OUT, 'w') as ini:
-            ini.write(form.li)
-            ini.flush()
-        iso.iso_builder_kvm()
-
-        time.sleep(3)
-        return redirect('/KVM/automicpackage')
-    return render_template('/KVM/automicpkg.html')
-
-
-@APP.route('/ESXi/automiclic', methods=['POST'])
-def automiclicesxi():
-    """esxi license form value"""
-    form = LICENSE(request)
-    iso = iso_builder
-    if request.method == 'POST':
-
-        with open(AUTH_CODE_ESXI_OUT, 'w') as ini:
-            ini.write(form.li)
-            ini.flush()
-        iso.iso_builder_esxi()
-
-        time.sleep(3)
-        return redirect('/ESXi/automicpackage')
-    return render_template('/ESXi/automicexplosionpkg.html')
-
-
-@APP.route('/automicheattemplate', methods=['GET'])
-def automicheattemplate():
-    """heat template landing page"""
-    return render_template('automicexplosionheat.html')
-
-
-@APP.route('/ONAP/automicheattemplate', methods=['GET'])
-def automicheattemplateopenecomp():
-    """onap heat template landing page"""
-    return render_template('/ONAP/automicexplosionheat.html')
 
 
 @APP.route('/automicheat', methods=['POST'])
@@ -416,6 +377,102 @@ def automicheat():
     return render_template('automicexplosionpkg.html')
 
 
+@APP.route('/automicheattemplate', methods=['GET'])
+def automicheattemplate():
+    """heat template landing page"""
+    return render_template('automicexplosionheat.html')
+
+
+@APP.route('/upload', methods=['POST'])
+def upload():
+    """upload files"""
+    return render_template('automicupload.html')
+
+
+@APP.route('/automicpackage', methods=['GET'])
+def automicpackage():
+    """download package"""
+    return render_template('automicexplosionpkg.html')
+
+
+@APP.route('/static/bootstrap-archive.zip', methods=['GET', 'POST'])
+def download():
+    """download link"""
+    return send_from_directory(APP.static_folder, filename='bootstrap-archive.zip')
+
+
+"""ONAP workflow"""
+
+
+@APP.route('/ONAP/automicinit', methods=['POST'])
+def automicopenecompinit():
+    """ONAP initcfg form values"""
+    form = INITCFG(request)
+    if request.method == 'POST':
+
+        with open(INIT_CFG) as infile, \
+                open(INIT_CFG_ONAP_OUT, 'w') as outfile:
+            for line in infile:
+                for src, target in form.initi.items():
+                    line = line.replace(src, target)
+                outfile.write(line)
+
+        return redirect('/ONAP/automicbootstrap')
+
+    return render_template('/ONAP/automicboot.html')
+
+
+@APP.route('/ONAP/automicbootstrap', methods=['GET'])
+def automicbootstrapopenecomp():
+    """onap bootstrap landing page"""
+    return render_template('/ONAP/automicboot.html')
+
+
+@APP.route('/ONAP/automicboot', methods=['POST'])
+def automicbootopenecomp():
+    """onap bootstrap form values"""
+    form = BOOTSTRAP(request)
+
+    if request.method == 'POST':
+
+        with open(BOOTSTRAP_XML) as infile, \
+                open(BOOTSTRAP_XML_ONAP_OUT, 'w') as outfile:
+            for line in infile:
+                for src, target in form.booti.items():
+                    line = line.replace(src, target)
+                outfile.write(line)
+
+        return redirect('/ONAP/automiclicense')
+    return render_template('/ONAP/automiclic.html')
+
+
+@APP.route('/ONAP/automiclicense', methods=['GET'])
+def automiclicenseopenecomp():
+    """onap license landing page"""
+    return render_template('/ONAP/automiclic.html')
+
+
+@APP.route('/ONAP/automiclic', methods=['POST'])
+def automiclicopenecomp():
+    """onap license form values"""
+
+    form = LICENSE(request)
+
+    if request.method == 'POST':
+
+        with open(AUTH_CODE_ONAP_OUT, 'w') as ini:
+            ini.write(form.li)
+            ini.flush()
+        return redirect('/ONAP/automicheattemplate')
+    return render_template('/ONAP/automicheat.html')
+
+
+@APP.route('/ONAP/automicheattemplate', methods=['GET'])
+def automicheattemplateopenecomp():
+    """onap heat template landing page"""
+    return render_template('/ONAP/automicexplosionheat.html')
+
+
 @APP.route('/ONAP/automicheat', methods=['POST'])
 def automicheatopenecomp():
     """onap heat template form values"""
@@ -439,52 +496,10 @@ def automicheatopenecomp():
     return render_template('/ONAP/automicexplosionpkg.html')
 
 
-@APP.route('/upload', methods=['POST'])
-def upload():
-    """upload files"""
-    return render_template('automicupload.html')
-
-
-@APP.route('/automicpackage', methods=['GET'])
-def automicpackage():
-    """download package"""
-    return render_template('automicexplosionpkg.html')
-
-
 @APP.route('/ONAP/automicpackage', methods=['GET'])
 def automicpackageopenecomp():
     """onap download package"""
     return render_template('/ONAP/automicexplosionpkg.html')
-
-
-@APP.route('/KVM/automicpackage', methods=['GET'])
-def automicpackagekvm():
-    """KVM download page"""
-    return render_template('/KVM/automicexplosionpkg.html')
-
-
-@APP.route('/ESXi/automicpackage', methods=['GET'])
-def automicpackageesxi():
-    """esxi download page"""
-    return render_template('/ESXi/automicexplosionpkg.html')
-
-
-@APP.route('/static/bootstrap-archive.zip', methods=['GET', 'POST'])
-def download():
-    """download link"""
-    return send_from_directory(APP.static_folder, filename='bootstrap-archive.zip')
-
-
-@APP.route('/static/bootstrap-archive-kvm.iso', methods=['GET', 'POST'])
-def downloadkvm():
-    """kvm download link"""
-    return send_from_directory(APP.static_folder, filename='bootstrap-archive-kvm.iso')
-
-
-@APP.route('/static/bootstrap-archive-esxi.iso', methods=['GET', 'POST'])
-def downloadesxi():
-    """esxi download link"""
-    return send_from_directory(APP.static_folder, filename='bootstrap-archive-esxi.iso')
 
 
 @APP.route('/ONAP/automicdeploycreds', methods=['GET'])
@@ -510,6 +525,9 @@ def automicdeploy():
         return redirect('/ONAP/automicdeploy')
 
     return render_template('/ONAP/automicdeploy.html')
+
+
+"""Deploy Workflow"""
 
 
 @APP.route("/addmachine", methods=['POST'])
@@ -638,6 +656,9 @@ def deletemachine():
         return jsonify(status='ERROR', message=str(e))
 
 
+"""Connectors"""
+
+
 @APP.route('/connector/nuage/', methods=['GET'])
 def automicconnectornuage():
     """Nuage connector landing page"""
@@ -648,6 +669,15 @@ def automicconnectornuage():
 def automicconnectoropenstack():
     """Openstack connector landing page"""
     return render_template('/connector/openstack/automicinit.html')
+
+
+"""JUJU"""
+
+
+@APP.route('/juju', methods=['GET'])
+def juju():
+    """redirection to JUJU_GUI website"""
+    return redirect(JU_JU)
 
 
 if __name__ == "__main__":
