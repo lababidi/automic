@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+          <title>Automic</title>
+          <link rel="shortcut icon" type="image/x-icon" href="/static/pan-logo-badge-green-dark-kick-up.png" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <meta name="description" content="">
+                  <meta name="author" content="">
+                      <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='css/bootstrap1.css') }}">
+                          <style>
+                              .form-columns {
+                                           -webkit-column-count: 2; /* Chrome, Safari, Opera */
+                                           -moz-column-count: 2; /* Firefox */
+                                           column-count: 2;
+                                           width: 50%;
+                                           float: Left;
+                                              -webkit-column-gap: 40px; /* Chrome, Safari, Opera */
+                                             -moz-column-gap: 40px; /* Firefox */
+                                              column-gap: 40px;
+                              }
+                              .form-columns1 {
+                                           -webkit-column-count: 1; /* Chrome, Safari, Opera */
+                                           -moz-column-count: 1; /* Firefox */
+                                           column-count: 1;
+                                           width: 24.99999%;
+                                            -webkit-column-gap: 40px; /* Chrome, Safari, Opera */
+                                            -moz-column-gap: 40px; /* Firefox */
+                                           column-gap: 40px;
+                              }
+                              p.ex1 {
+                                  display: block;
+                                  margin-left: 1em;
+                                  float: right;
+                              }
+                              body {
+                                  padding-top: 30px; /* 60px to make the container go all the way to the bottom of the topbar */
+                              }
+
+                          </style>
+                          <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='css/bootstrap-responsive.css') }}">
+                              
+                              <!--
+                               jQuery-menu-aim: the following styles are used to customize bootstrap's
+                               dropdowns and popover to play a little nicer w/ this example. They are
+                               personal choices and not necessary for your use of jQuery-menu-aim.
+                               jQuery-menu-aim is HTML/style-agnostic, it simply fires events when menu
+                               items should be activated.
+                               You can choose to do whatever you want w/ those events.
+                               -->
+                              <style>
+                                  .navbar .popover {
+                                      width: 400px;
+                                      -webkit-border-top-left-radius: 0px;
+                                      -webkit-border-bottom-left-radius: 0px;
+                                      border-top-left-radius: 0px;
+                                      border-bottom-left-radius: 0px;
+                                      overflow: hidden;
+                                  }
+                              .navbar .popover-content {
+                                  text-align: center;
+                              }
+                              .navbar .popover-content img {
+                                  height: 212px;
+                                  max-width: 250px;
+                              }
+                              .navbar .dropdown-menu {
+                                  -webkit-border-top-right-radius: 0px;
+                                  -webkit-border-bottom-right-radius: 0px;
+                                  border-top-right-radius: 0px;
+                                  border-bottom-right-radius: 0px;
+                                  -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+                                  -moz-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+                                  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+                              }
+                              .navbar .dropdown-menu > li > a:hover {
+                                  background-image: none;
+                                  color: white;
+                                  background-color: rgb(0, 129, 194);
+                                  background-color: rgba(0, 129, 194, 0.5);
+                              }
+                              .navbar .dropdown-menu > li > a.maintainHover {
+                                  color: white;
+                                  background-color: #0081C2;
+                              }
+                              </style>
+                              <!--[if lt IE 9]>
+                               <script type="text/javascript" src="{{ url_for('static', filename = '/js/html5shiv.js') }}"></script>
+                               <script src="/js/html5shiv.js"></script>
+                               <![endif]-->
+
+  </head>
+
+  <body>
+
+<div class="form-columns">
+
+
+    <form action="/automicheat" method="post">
+
+
+      <label for="oin">Openstack Image Name:</label><input type="text" class="form-control" id="oin" name="oin" placeholder="PAN8" size="40">
+      <label for="ofl">Openstack Flavor:</label><input type="text" class="form-control" id="ofl" name="ofl" placeholder="m1-large" size="40">
+      <label for="omnn">Openstack Management Network Name:</label><input type="text" class="form-control" id="omnn" name="omnn" placeholder="Management" size="40">
+      <label for="omsn">Openstack Management Subnet Name:</label><input type="text" class="form-control" id="omsn" name="omsn" placeholder="Management" size="40">
+      <label for="omip">Openstack Management IP:</label><input type="text" class="form-control" id="omip" name="omip" placeholder="192.168.1.1" size="15">
+      <label for="osnn">Openstack Outside Network Name:</label><input type="text" class="form-control" id="osnn" name="osnn" placeholder="Outside" size="40">
+
+        <br>
+      <label for="ossn">Openstack Outside Subnet Name:</label><input type="text" class="form-control" id="ossn" name="ossn" placeholder="Outside" size="40">
+      <label for="ooip">Openstack Internet IP:</label><input type="text" class="form-control" id="ooip" name="ooip" placeholder="192.168.1.1" size="15">
+      <label for="oisn">Openstack Inside Network Name:</label><input type="text" class="form-control" id="oisn" name="oisn" placeholder="Inside" size="40">
+      <label for="oiss">Openstack Inside Subnet Name:</label><input type="text" class="form-control" id="oiss" name="oiss" placeholder="Inside" size="40">
+      <label for="oiip">Openstack Inside IP:</label><input type="text" class="form-control" id="oiip" name="oiip" placeholder="192.168.1.1" size="40">
+<br>  <button type="submit" class="btn btn-success">Generate Heat Template and Download Package</button>
+
+    </form>
+
+
+</div>
+<br>
+<p class="ex1">        To build an instance in Openstack, source the openstack credentials</p>
+<br>
+<br>
+<p class="ex1">        source admin-openrc.sh</p>
+<br>
+<br>
+<p class="ex1">        pip install python-openstackclient</p>
+<br>
+<br>
+<p class="ex1">        Extract the zip package and cd to main directory, the run:</p>
+<br>
+<br>
+<p class="ex1">"openstack --debug stack create panstack -f heat-template.yaml</p>
+
+<p class="ex1"> -e heat-environment.yaml"</p>
+</body>
+</html>
