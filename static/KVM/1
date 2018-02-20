@@ -1,0 +1,10 @@
+import os
+from subprocess import call
+
+cwd = os.getcwd()
+
+print(cwd)
+
+files = os.listdir(cwd)
+call(["ls", "-l"])
+subprocess.Popen(["mkisofs -J -R -v -V 'bootstrap' -A 'bootstrap' -ldots -l -allow-lowercase -allow-multidot -o 'bootstrap-archive-kvm.iso' ./home/ubuntu/automic/static/KVM/bootstrap"])

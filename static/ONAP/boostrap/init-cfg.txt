@@ -1,0 +1,10 @@
+type=static
+ip-address=
+default-gateway=
+netmask=
+hostname=abc
+dns-primary=
+panorama-server=
+dgname=
+tplname=
+vm-auth-key=
