@@ -7,14 +7,8 @@ class iso_builder(object):
 
     def iso_builder_esxi(self):
         """function to build iso"""
-        call({"""
-              mkisofs", "-J", "-R", "-v", "-V", "bootstrap", "-A", "bootstrap",
-              "-ldots", "-l", "-allow-lowercase", "-allow-multidot", "-o",
-               + ISO_BASE, + ISO_ESXI """
-              })
+        call({"mkisofs", "-J", "-R", "-v", "-V", "bootstrap", "-A", "bootstrap", "-ldots", "-l", "-allow-lowercase", "-allow-multidot", "-o", ISO_BASE, ISO_ESXI })
 
     def iso_builder_kvm(self):
         """function to build iso"""
         call(["mkisofs", "-J", "-R", "-v", "-V", "bootstrap", "-A", "bootstrap", "-ldots", "-l", "-allow-lowercase", "-allow-multidot", "-o", ISO_BASE, ISO_KVM ])
-#ISO_BASE
-#ISO_ESXI
