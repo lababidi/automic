@@ -1,0 +1,13 @@
+parameters:
+  image: oin
+  flavor: ofl
+  net_management: omnn
+  subnet_management: omsn
+  ip_management: mgtip
+  net_outside: osnn
+  subnet_outside: ossn
+  ip_outside: e1i
+  net_inside: oisn
+  subnet_inside: oiss
+  ip_inside: oiip 
+  
