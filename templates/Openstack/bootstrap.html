@@ -118,6 +118,33 @@
 .progressbar li.active + li:after {
   background-color: green;
 }
+         .form-columns {
+                                           -webkit-column-count: 2; /* Chrome, Safari, Opera */
+                                           -moz-column-count: 2; /* Firefox */
+                                           column-count: 2;
+                                           width: 50%;
+                                           float: Left;
+                                              -webkit-column-gap: 40px; /* Chrome, Safari, Opera */
+                                             -moz-column-gap: 40px; /* Firefox */
+                                              column-gap: 40px;
+                              }
+                              .form-columns1 {
+                                           -webkit-column-count: 1; /* Chrome, Safari, Opera */
+                                           -moz-column-count: 1; /* Firefox */
+                                           column-count: 1;
+                                           width: 24.99999%;
+                                            -webkit-column-gap: 40px; /* Chrome, Safari, Opera */
+                                            -moz-column-gap: 40px; /* Firefox */
+                                           column-gap: 40px;
+                              }
+                              p.ex1 {
+                                  display: block;
+                                  margin-left: 1em;
+                                  float: right;
+                              }
+                              body {
+                                  padding-top: 30px; /* 60px to make the container go all the way to the bottom of the topbar */
+                              }
     </style>
 
     <!--[if lt IE 9]>
@@ -129,8 +156,8 @@
 
   <body>
 
-
-
+{% extends "/Openstack/base.html" %} {% block content %} {{pkg}}
+<BR><BR>
     <div class="container1">
       <ul class="progressbar">
         <li class="active">Build init-cfg.txt</li>
@@ -139,7 +166,10 @@
           <li>Build Heat Template</li>
       </ul>
     </div>
-<div class="container">
+
+
+
+    <div class="form-columns">
 
 
   <form  action="bootstrap" method="post">
@@ -167,6 +197,6 @@
 
 </div>
 
-{% extends "/Openstack/base.html" %} {% block content %} {{pkg}} {% endblock %}
+ {% endblock %}
   </body>
 </html>

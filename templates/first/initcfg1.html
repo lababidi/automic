@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+       <title>bootsrap maker</title>
+       <link rel="stylesheet" media="screen" href ="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+       <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-theme.min.css') }}">
+       <meta name="viewport" content = "width=device-width, initial-scale=1.0">
+
+    </head>
+    <body>
+
+
+<div class="container">
+
+
+  <form  action="/btstrap" method="post" role="form">
+    {{ form.csrf }}
+    <div class="form-group">
+      <label for="mgtip">Management IP:</label><input type="text" class="form-control" id="mgtip" name="mgtip" placeholder="192.168.1.1">
+      <label for="mgtmask">Management Mask:</label><input type="text" class="form-control" id="mgtmask" name="mgtmask" placeholder="255.255.255.0">
+      <label for="mgtgateway">Management Gateway:</label><input type="text" class="form-control" id="mgtgateway" name="mgtgateway" placeholder="192.168.1.254">
+<br>
+      <label for="e1ip">Ethernet1/1:</label><input type="text" class="form-control" id="e1ip" name="e1ip" placeholder="192.168.2.1/24">
+      <label for="e1zone">Zone:</label><input type="text" class="form-control" id="e1zone" name="e1zone" placeholder="Internet">
+      <label for="e1inttype">Interface Type:</label><input type="text" class="form-control" id="e1inttype" name="e1inttype" placeholder="Layer3">
+      <label for="e1profile">Interface Profile:</label><input type="text" class="form-control" id="e1profile" name="e1profile" placeholder="Allow Ping/SSH/HTTPS">
+<br>
+      <label for="e2ip">Ethernet1/2:</label><input type="text" class="form-control" id="e2ip" name="e2ip" placeholder="192.168.3.1/24">
+      <label for="e2zone">Zone:</label><input type="text" class="form-control" id="e2zone" name="e2zone" placeholder="Inside">
+      <label for="e2inttype">Interface Type:</label><input type="text" class="form-control" id="e2inttype" name="e2inttype" placeholder="Layer3">
+      <label for="e2profile">Interface Profile:</label><input type="text" class="form-control" id="e2profile" name="e2profile" placeholder="Allow Ping/SSH/HTTPS">
+<br>
+      <label for="dfrdest">Default Route:</label><input type="text" class="form-control" id="dfrdest" name="dfrdest" placeholder="0.0.0.0/0">
+      <label for="dfrint">Default Route Interface:</label><input type="text" class="form-control" id="dfrint" name="dfrint" placeholder="Ethernet1/1">
+<br>
+      <label for="dfrdest">Security Rule:</label><input type="text" class="form-control" id="AllowOut" name="AllowOut" placeholder="Allow Out">                 
+<br>
+      <button type="submit" class="btn btn-success">Generate Bootstrap Package</button>
+         </div>
+        </form>
+
+  <br>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+
+        {% for message in messages %}
+            {% if "Error" not in message[1]: %}
+                <div class="alert alert-info">
+                <strong>Success! </strong> {{ message[1] }}
+                </div>
+            {% endif %}
+
+            {% if "Error" in message[1]: %}
+                <div class="alert alert-warning">
+                {{ message[1] }}
+                </div>
+            {% endif %}
+        {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+
+</body>
+</html>

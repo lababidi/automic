@@ -129,7 +129,8 @@
 
   <body>
 
-
+{% extends "/Openstack/base.html" %} {% block content %} {{pkg}}
+    <BR><br>
        <div class="container1">
       <ul class="progressbar">
         <li class="active">Build init-cfg.txt</li>
@@ -155,5 +156,5 @@
 </div>
 
     </body>
-<footer>{% extends "/Openstack/base.html" %} {% block content %} {{pkg}} {% endblock %}</footer>
+{% endblock %}
 </html>

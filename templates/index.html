@@ -10,7 +10,7 @@
 
     <meta charset="utf-8">
     <title>Safe-Networking</title>
-    <link rel="shortcut icon" type="image/x-icon" href="/static/pan-logo-badge-green-dark-kick-up.png"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/images/pan-logo-badge-green-dark-kick-up.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -67,6 +67,28 @@
         color: white;
         background-color: #0081C2;
         }
+        .footer {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            padding: 1rem;
+            background-color: #efefef;
+            text-align: center;
+        }
+        .imghome {
+            overflow: hidden;
+            margin: auto;
+            position: relative;
+            max-height: 900px;
+            max-width: 900px;
+
+        }
+        img {
+            object-fit: contain;
+            max-width: 100%;
+            max-height: 100%;
+        }
     </style>
 
 
@@ -79,7 +101,7 @@
 
 <body>
     <div class="navbar navbar-inverse navbar-static-top>
-      <a href="/"><img src="/static/pan-logo-badge-green-dark-kick-up.png" alt="" style="width:150px;height:110px" width="150" height="110" class="img-thumbnail img-responsive" align="left"/></a>
+      <a href="/"><img src="/static/images/pan-logo-badge-green-dark-kick-up.png" alt="" style="width:150px;height:110px" width="150" height="110" class="img-thumbnail img-responsive" align="left"/></a>
       <div class="navbar-inner">
         <div class="container">
           <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -144,6 +166,7 @@
               <li class="active">
                 <a href="/logout" class>Logout</a>
               </li>
+
                 <ul class="dropdown-menu" role="menu">
                 </ul>
             </ul>
@@ -160,11 +183,10 @@
         </div>
       </div>
     </div>
-
-        </div>
-      </div>
-    </div>
-
-    </div>
+<br><br><br>
+<div class="imghome">
+     <img src="static/images/automichome.png">
+</div>
+<div class="footer"></div>
 </body>
 </html>

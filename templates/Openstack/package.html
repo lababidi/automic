@@ -121,7 +121,9 @@
     </style>
     </head>
     <body>
-
+{% extends "/Openstack/base.html" %}
+{% block content %} {{pkg}}
+    <br><br>
 <div class="container">
 
 
@@ -145,9 +147,7 @@
 </div>
 
 
-
-{% extends "/Openstack/base.html" %}
-{% block content %} {{pkg}} {% endblock %}
+ {% endblock %}
 
 
 </body>

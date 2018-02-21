@@ -65,6 +65,76 @@
             color: white;
             background-color: #0081C2;
         }
+        .progressbar li {
+  list-style: none;
+  display: inline-block;
+  width: 23.33%;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+}
+.progressbar li:before {
+  content: counter(step);
+  counter-increment: step;
+  width: 30px;
+  height: 30px;
+  line-height : 30px;
+  border: 1px solid #ddd;
+  border-radius: 100%;
+  display: block;
+  text-align: center;
+  margin: 0 auto 10px auto;
+  background-color: #fff;
+}
+.progressbar li:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background-color: #ddd;
+  top: 15px;
+  left: -50%;
+  z-index : -1;
+}
+.progressbar li:first-child:after {
+  content: none;
+}
+.progressbar li.active {
+  color: green;
+}
+.progressbar li.active:before {
+  border-color: green;
+}
+.progressbar li.active + li:after {
+  background-color: green;
+}
+               .form-columns {
+                                           -webkit-column-count: 2; /* Chrome, Safari, Opera */
+                                           -moz-column-count: 2; /* Firefox */
+                                           column-count: 2;
+                                           width: 50%;
+                                           float: inherit;
+                                              -webkit-column-gap: 40px; /* Chrome, Safari, Opera */
+                                             -moz-column-gap: 40px; /* Firefox */
+                                              column-gap: 40px;
+                              }
+                              .form-columns1 {
+                                           -webkit-column-count: 1; /* Chrome, Safari, Opera */
+                                           -moz-column-count: 1; /* Firefox */
+                                           column-count: 1;
+                                           width: 24.99999%;
+                                            -webkit-column-gap: 40px; /* Chrome, Safari, Opera */
+                                            -moz-column-gap: 40px; /* Firefox */
+                                           column-gap: 40px;
+                              }
+                              p.ex1 {
+                                  display: block;
+                                  margin-left: 1em;
+                                  float: right;
+                              }
+                              body {
+                                  padding-top: 30px; /* 60px to make the container go all the way to the bottom of the topbar */
+                              }
     </style>
 
     <!--[if lt IE 9]>
@@ -75,111 +145,18 @@
   </head>
 
   <body>
-    <div class="navbar navbar-inverse navbar-static-top>
-      <a href="/"><img src="/static/pan-logo-badge-green-dark-kick-up.png" alt="" style="width:150px;height:110px" width="150" height="110" class="img-thumbnail img-responsive" align="left"/><
-/a>
-      <div class="navbar-inner">
-        <div class="container">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="brand" href="/">Home</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li class="active">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dashboard</a>
-                <ul class="dropdown-menu" role="menu">
-                    <li data-submenu-id="submeu-dashboard">
-                       <a href="/dashboard">Security Intelligence</a>
-                       <div id="submenu--dashboard" class="popover">
-                       </div>
-                    </li>
-                </ul>
-             </li>
-            </ul>
-           </div>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li class="active">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Reports</a>
-                <ul class="dropdown-menu" role="menu">
-                    <li data-submenu-id="submeu-source-intelligence">
-                        <a href="/srchits">Source Intelligence</a>
-                        <div id="submenu--source-intelligence" class="popover">
-                        </div>
-                    </li>
-                    <li data-submenu-id="submenu-destinationintell">
-                        <a href="/destintel">Destination Intelligence</a>
-                        <div id="submenu-destinationintell" class="popover">
-                        </div>
-                    </li>
-                    <li data-submenu-id="submenu-DomainIntelligence">
-                        <a href="/domainmalicioussamples/">Domain Intelligence</a>
-                        <div id="submenu-DomainIntelligence" class="popover">
-                        </div>
-                    </li>
-                    <li data-submenu-id="submenu-malwarefamilyintell">
-                        <a href="/malwarefamily">Malware Family Intelligence</a>
-                        <div id="submenu-malwarefamilyintell" class="popover">
-                        </div>
-                    </li>
-                    <li data-submenu-id="submenu-malwarefiletypes">
-                        <a href="/funnel/">Malware FileTypes</a>
-                        <div id="submenu-malwarefiletypes" class="popover">
-                        </div>
-                    </li>
-                    <li data-submenu-id="submenu-autofocusintelligence">
-                        <a href="/srcipreport">Autofocus Intelligence</a>
-                        <div id="submenu-autofocusintelligence" class="popover">
-                        </div>
-                    </li>
-                    <li data-submenu-id="submenu-domainedl">
-                        <a href="/edldomain/">Domain EDL</a>
-                        <div id="submenu-domainedl" class="popover">
-                        </div>
-                    </li>
-                    <li data-submenu-id="submenu-ipedl">
-                       <a href="/edlip/">IP EDL</a>
-                       <div id="submenu-ipedl" class="popover">
-                       </div>
-                    </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li class="active">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Administration</a>
-                <ul class="dropdown-menu" role="menu">
-                    <li data-submenu-id="configuration">
-                        <a href="/configuration">Configuration</a>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <div class="container">
-          <div class="row">
-          <div class="col-xs-12">
-  <h1 class="text-center"><font color=#FFFFFF>Automic Automation</font> </h1>
-          <right></right>
-          </div>
-        </div>
-      </div>
 
-        </div>
-      </div>
+{% extends "/ONAP/base.html" %} {% block content %} {{pkg}}
+<br><br>
+    <div class="container1">
+      <ul class="progressbar">
+        <li class="active">Build init-cfg.txt</li>
+          <li class="active">Build Bootstrap.xml</li>
+        <li class="active">Build license</li>
+          <li class="active">Build ONAP Heat Template</li>
+      </ul>
     </div>
-
-        </div>
-      </div>
-    </div>
-
-    </div>
-
-<div class="container">
+<div class="form-columns">
 
 
   <form action="/ONAP/heat" method="post">
@@ -204,6 +181,7 @@
 
   <br>
 
-
+</div>
+  {% endblock %}
     </body>
 </html>

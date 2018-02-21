@@ -10,26 +10,7 @@
 
     <meta charset="utf-8">
     <title>Automic</title>
-    <link rel="shortcut icon" type="image/x-icon" href="/static/pan-logo-badge-green-dark-kick-up.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='css/bootstrap1.css') }}">
-    <style>
-      body {
-        padding-top: 30px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-    </style>
-   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='css/bootstrap-responsive.css') }}">
 
-    <!--
-      jQuery-menu-aim: the following styles are used to customize bootstrap's
-      dropdowns and popover to play a little nicer w/ this example. They are
-      personal choices and not necessary for your use of jQuery-menu-aim.
-      jQuery-menu-aim is HTML/style-agnostic, it simply fires events when menu
-      items should be activated.
-      You can choose to do whatever you want w/ those events.
-    -->
     <style>
         .navbar .popover {
             width: 400px;
@@ -118,6 +99,33 @@
 .progressbar li.active + li:after {
   background-color: green;
 }
+                       .form-columns {
+                                           -webkit-column-count: 3; /* Chrome, Safari, Opera */
+                                           -moz-column-count: 3; /* Firefox */
+                                           column-count: 3;
+                                           width: 85%;
+                                           float: Left;
+                                              -webkit-column-gap: 40px; /* Chrome, Safari, Opera */
+                                             -moz-column-gap: 40px; /* Firefox */
+                                              column-gap: 40px;
+                              }
+                              .form-columns1 {
+                                           -webkit-column-count: 1; /* Chrome, Safari, Opera */
+                                           -moz-column-count: 1; /* Firefox */
+                                           column-count: 1;
+                                           width: 24.99999%;
+                                            -webkit-column-gap: 40px; /* Chrome, Safari, Opera */
+                                            -moz-column-gap: 40px; /* Firefox */
+                                           column-gap: 40px;
+                              }
+                              p.ex1 {
+                                  display: block;
+                                  margin-left: 1em;
+                                  float: right;
+                              }
+                              body {
+                                  padding-top: 30px; /* 60px to make the container go all the way to the bottom of the topbar */
+                              }
     </style>
 
 
@@ -125,14 +133,14 @@
 
   <body>
 
-
-
+{% extends "/AWS/base.html" %} {% block content %} {{pkg}}
+<br><br>
     <div class="container1">
       <ul class="progressbar">
         <li class="active">Build init-cfg.txt</li>
           <li class="active">Build Bootstrap.xml</li>
         <li class="active">Build license</li>
-          <li class="active">Build Heat Template</li>
+          <li class="active">Build Cloud Formation Template</li>
       </ul>
     </div>
 <div class="container">
@@ -186,7 +194,7 @@
   </body>
     <br>
 
-<footer>{% extends "/Openstack/base.html" %} {% block content %} {{pkg}} {% endblock %}</footer>
+ {% endblock %}
 
 
 </html>
