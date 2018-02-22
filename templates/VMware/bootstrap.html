@@ -66,15 +66,15 @@
             background-color: #0081C2;
         }
             .progressbar {
-  counter-reset: step;
-}
+                counter-reset: step;
+            }
 .progressbar li {
-  list-style: none;
-  display: inline-block;
-  width: 23.33%;
-  position: relative;
-  text-align: center;
-  cursor: pointer;
+    list-style: none;
+    display: inline-block;
+    width: 23.33%;
+    position: relative;
+    text-align: center;
+    cursor: pointer;
 }
 .progressbar li:before {
   content: counter(step);
@@ -112,14 +112,16 @@
   background-color: green;
 }
                .form-columns {
-                                           -webkit-column-count: 2; /* Chrome, Safari, Opera */
-                                           -moz-column-count: 2; /* Firefox */
-                                           column-count: 2;
-                                           width: 50%;
+                                           -webkit-column-count: 3; /* Chrome, Safari, Opera */
+                                           -moz-column-count: 3; /* Firefox */
+                                           column-count: 3;
+                                           width: 85%;
                                            float: Left;
                                               -webkit-column-gap: 40px; /* Chrome, Safari, Opera */
                                              -moz-column-gap: 40px; /* Firefox */
                                               column-gap: 40px;
+                    padding-left: 3cm;
+                   padding-right: 3cm;
                               }
                               .form-columns1 {
                                            -webkit-column-count: 1; /* Chrome, Safari, Opera */
@@ -138,6 +140,10 @@
                               body {
                                   padding-top: 30px; /* 60px to make the container go all the way to the bottom of the topbar */
                               }
+                .container {
+            padding-left: 3cm;
+            padding-right: 3cm;
+        }
     </style>
 
     <!--[if lt IE 9]>
@@ -158,8 +164,8 @@
           <li>Download ISO</li>
       </ul>
     </div>
-
-<div class="form-columns">
+<br><br>
+<div class="container">
 
 
   <form  action="/VMware/boot" method="post">
@@ -169,7 +175,7 @@
       <label for="e1zone">Zone:</label><input type="text" class="form-control" id="e1zone" name="e1zone" placeholder="Internet">
       <label for="e1inttype">Interface Type:</label><input type="text" class="form-control" id="e1inttype" name="e1inttype" placeholder="Layer3">
       <label for="e1profile">Interface Profile:</label><input type="text" class="form-control" id="e1profile" name="e1profile" placeholder="PingSSHHTTPS">
-<br>
+        <br>
       <label for="e2ip">Ethernet1/2:</label><input type="text" class="form-control" id="e2ip" name="e2ip" placeholder="192.168.3.1/24">
       <label for="e2zone">Zone:</label><input type="text" class="form-control" id="e2zone" name="e2zone" placeholder="Inside">
       <label for="e2inttype">Interface Type:</label><input type="text" class="form-control" id="e2inttype" name="e2inttype" placeholder="Layer3">

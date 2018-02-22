@@ -65,6 +65,64 @@
             color: white;
             background-color: #0081C2;
         }
+                .container {
+            padding-left: 3cm;
+        }
+                       .form-columns {
+                           -webkit-column-count: 3; /* Chrome, Safari, Opera */
+                           -moz-column-count: 3; /* Firefox */
+                           column-count: 3;
+                           width: 85%;
+                           float: Left;
+                           -webkit-column-gap: 40px; /* Chrome, Safari, Opera */
+                           -moz-column-gap: 40px; /* Firefox */
+                           column-gap: 40px;
+                           padding-left: 3cm;
+                           padding-right: 3cm;
+                       }
+        .container3 {
+	clear:left;
+	float:left;
+	width:100%;
+	overflow:hidden;
+}
+.container2 {
+	clear:left;
+	float:left;
+	width:100%;
+	position:relative;
+	right:33.333%;
+}
+.container1 {
+	float:left;
+	width:100%;
+	position:relative;
+	right:33.33%;
+
+}
+.col1 {
+	float:left;
+	width:29.33%;
+	position:relative;
+	left:68.67%;
+	overflow:hidden;
+    padding-left: 3cm;
+}
+.col2 {
+	float:left;
+	width:29.33%;
+	position:relative;
+	left:72.67%;
+	overflow:hidden;
+}
+.col3 {
+	float:left;
+	width:29.33%;
+	position:relative;
+	left:76.67%;
+	overflow:hidden;
+}
+
     </style>
 
     <!--[if lt IE 9]>
@@ -77,47 +135,54 @@
   <body>
   {% extends "/VMware/base.html" %} {% block content %} {{pkg}}
   <br><br>
-<div class="container">
+<!--<div class="form-columns">-->
 
+    <div class="container3">
+        <div class="container2">
+            <div class="container1">
+                <div class="col1">
+<form action="/upload" method="post">
 
-<form  action="/upload" method="post">
-    <div class="form-group">
 
 <br>
       <button type="file" class="btn btn-success">Upload Content Packages</button>
-         </div>
+
         </form>
-</div>
-<div class="container">
-    <form method=POST enctype=multipart/form-data action="">
+
+
+
+                    <form method=POST enctype=multipart/form-data action="">
       <p><input type=file name="Content Udpate" >
          <input type=submit value=Upload>
     </form>
 
- 
-    <div class="form-group">
-
+</div>
+<div class="col2">
+<form action="/upload" method="post">
 <br>
       <button type="submit" class="btn btn-success">Upload Software Update</button>
-         </div>
+
         </form>
-</div>
-<div class="container">
+
+
 
  <form method=POST enctype=multipart/form-data action="">
       <p><input type=file name="Content Udpate" >
          <input type=submit value=Upload>
     </form>
-
-
+</div>
+   <div class="col3">
   <form  action="/static/bootstrap-archive-esxi.iso" method="get">
-    <div class="form-group">
+
 
 <br>
       <button type="submit" class="btn btn-success">Dowload ISO Package</button>
-         </div>
+
         </form>
 </div>
+      </div>
+        </div>
+    </div>
   <br>
 
 {% endblock %}
