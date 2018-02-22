@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--
+      jQuery-menu-aim: this example uses Twitter's Bootstrap
+      (http://twitter.github.com/bootstrap) to setup a clean example page.
+      Search for "jQuery-menu-aim" in this page to find the jQuery-menu-aim
+      integration examples.
+    -->
+
+    <meta charset="utf-8">
+    <title>Automic</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/pan-logo-badge-green-dark-kick-up.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='css/bootstrap1.css') }}">
+    <style>
+      body {
+        padding-top: 30px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='css/bootstrap-responsive.css') }}">
+
+    <!--
+      jQuery-menu-aim: the following styles are used to customize bootstrap's
+      dropdowns and popover to play a little nicer w/ this example. They are
+      personal choices and not necessary for your use of jQuery-menu-aim.
+      jQuery-menu-aim is HTML/style-agnostic, it simply fires events when menu
+      items should be activated.
+      You can choose to do whatever you want w/ those events.
+    -->
+    <style>
+        .navbar .popover {
+            width: 400px;
+            -webkit-border-top-left-radius: 0px;
+            -webkit-border-bottom-left-radius: 0px;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+            overflow: hidden;
+        }
+        .navbar .popover-content {
+            text-align: center;
+        }
+        .navbar .popover-content img {
+            height: 212px;
+            max-width: 250px;
+        }
+        .navbar .dropdown-menu {
+            -webkit-border-top-right-radius: 0px;
+            -webkit-border-bottom-right-radius: 0px;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        .navbar .dropdown-menu > li > a:hover {
+            background-image: none;
+            color: white;
+            background-color: rgb(0, 129, 194);
+            background-color: rgba(0, 129, 194, 0.5);
+        }
+        .navbar .dropdown-menu > li > a.maintainHover {
+            color: white;
+            background-color: #0081C2;
+        }
+        .progressbar {
+  counter-reset: step;
+}
+.progressbar li {
+  list-style: none;
+  display: inline-block;
+  width: 23.33%;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+}
+.progressbar li:before {
+  content: counter(step);
+  counter-increment: step;
+  width: 30px;
+  height: 30px;
+  line-height : 30px;
+  border: 1px solid #ddd;
+  border-radius: 100%;
+  display: block;
+  text-align: center;
+  margin: 0 auto 10px auto;
+  background-color: #fff;
+}
+.progressbar li:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background-color: #ddd;
+  top: 15px;
+  left: -50%;
+  z-index : -1;
+}
+.progressbar li:first-child:after {
+  content: none;
+}
+.progressbar li.active {
+  color: green;
+}
+.progressbar li.active:before {
+  border-color: green;
+}
+.progressbar li.active + li:after {
+  background-color: green;
+}
+    </style>
+
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="{{ url_for('static', filename = '/js/html5shiv.js') }}"></script>
+      <script src="/js/html5shiv.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <body>
+{% extends "/AWS/base.html" %} {% block content %} {{pkg}}
+    <br><br>
+    <div class="container1">
+      <ul class="progressbar">
+        <li class="active">Build init-cfg.txt</li>
+        <li>Build Bootstrap.xml</li>
+        <li>Build license</li>
+          <li>Build Cloud Formation Template</li>
+      </ul>
+    </div>
+
+<div class="container">
+
+
+  <form action="/AWS/init" method="post">
+    <div class="form-group">
+      <label for="mgtip">Management IP:</label><input type="text" class="form-control" id="mgtip" name="mgtip" placeholder="192.168.1.1">
+      <label for="mgtmask">Management Mask:</label><input type="text" class="form-control" id="mgtmask" name="mgtmask" placeholder="255.255.255.0">
+      <label for="mgtgateway">Management Gateway:</label><input type="text" class="form-control" id="mgtgateway" name="mgtgateway" placeholder="192.168.1.254">
+        <label for="mgtdns">Management Gateway:</label><input type="text" class="form-control" id="mgtdns" name="mgtdns" placeholder="8.8.8.8">
+         <label for="hstnme">Hostname:</label><input type="text" class="form-control" id="hstnme" name="hstnme" placeholder="hostname">
+      <label for="pno">Panorama:</label><input type="text" class="form-control" id="pno" name="pno" placeholder="22.3.2.3">
+      <label for="panokey">Panorama Key:</label><input type="text" class="form-control" id="panokey" name="panokey" placeholder="h13sdf33">
+
+
+        <br>
+<br>
+      <button type="submit" class="btn btn-success">Generate Init File</button>
+         </div>
+        </form>
+
+  <br>
+
+</div>
+  {% endblock %}
+    </body>
+</html>
