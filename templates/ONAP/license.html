@@ -111,6 +111,9 @@
 .progressbar li.active + li:after {
   background-color: green;
 }
+                .container {
+            padding-left: 3cm;
+        }
     </style>
 
     <!--[if lt IE 9]>
@@ -124,11 +127,11 @@
 
 {% extends "/ONAP/base.html" %} {% block content %} {{pkg}}
 
-       <div class="container1">
+    <div class="container1">
       <ul class="progressbar">
-        <li class="active">Build init-cfg.txt</li>
+          <li class="active">Build init-cfg.txt</li>
           <li class="active">Build Bootstrap.xml</li>
-        <li class="active">Build license</li>
+          <li class="active">Build license</li>
           <li>Build ONAP Heat Template</li>
       </ul>
     </div>
