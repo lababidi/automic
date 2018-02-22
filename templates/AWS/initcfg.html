@@ -114,6 +114,48 @@
                 .container {
             padding-left: 3cm;
         }
+        .container3 {
+	clear:left;
+	float:left;
+	width:100%;
+	overflow:hidden;
+}
+.container2 {
+	clear:left;
+	float:left;
+	width:100%;
+	position:relative;
+	right:33.333%;
+}
+.container0 {
+	float:left;
+	width:100%;
+	position:relative;
+	right:33.33%;
+
+}
+.col1 {
+	float:left;
+	width:29.33%;
+	position:relative;
+	left:68.67%;
+	overflow:hidden;
+    padding-left: 3cm;
+}
+.col2 {
+	float:left;
+	width:29.33%;
+	position:relative;
+	left:72.67%;
+	overflow:hidden;
+}
+.col3 {
+	float:left;
+	width:29.33%;
+	position:relative;
+	left:76.67%;
+	overflow:hidden;
+}
     </style>
 
     <!--[if lt IE 9]>
@@ -134,17 +176,21 @@
           <li>Build Cloud Formation Template</li>
       </ul>
     </div>
-
-<div class="container">
+<br><br>
+<div class="container3">
+<div class="container2">
+<div class="container0">
 
 
   <form action="/AWS/init" method="post">
-    <div class="form-group">
+    <div class="col1">
       <label for="mgtip">Management IP:</label><input type="text" class="form-control" id="mgtip" name="mgtip" placeholder="192.168.1.1">
       <label for="mgtmask">Management Mask:</label><input type="text" class="form-control" id="mgtmask" name="mgtmask" placeholder="255.255.255.0">
       <label for="mgtgateway">Management Gateway:</label><input type="text" class="form-control" id="mgtgateway" name="mgtgateway" placeholder="192.168.1.254">
         <label for="mgtdns">Management Gateway:</label><input type="text" class="form-control" id="mgtdns" name="mgtdns" placeholder="8.8.8.8">
-         <label for="hstnme">Hostname:</label><input type="text" class="form-control" id="hstnme" name="hstnme" placeholder="hostname">
+    </div>
+      <div class="col2">
+      <label for="hstnme">Hostname:</label><input type="text" class="form-control" id="hstnme" name="hstnme" placeholder="hostname">
       <label for="pno">Panorama:</label><input type="text" class="form-control" id="pno" name="pno" placeholder="22.3.2.3">
       <label for="panokey">Panorama Key:</label><input type="text" class="form-control" id="panokey" name="panokey" placeholder="h13sdf33">
 
@@ -156,7 +202,8 @@
         </form>
 
   <br>
-
+</div>
+</div>
 </div>
   {% endblock %}
     </body>
