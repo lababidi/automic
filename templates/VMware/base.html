@@ -68,27 +68,14 @@
         background-color: #0081C2;
         }
         .footer {
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            padding: 1rem;
-            background-color: #efefef;
-            text-align: center;
-        }
-        .imghome {
-            overflow: hidden;
-            margin: auto;
-            position: relative;
-            max-height: 900px;
-            max-width: 900px;
-
-        }
-        img {
-            object-fit: contain;
-            max-width: 100%;
-            max-height: 100%;
-        }
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
+}
     </style>
 
 
@@ -166,7 +153,6 @@
               <li class="active">
                 <a href="/logout" class>Logout</a>
               </li>
-
                 <ul class="dropdown-menu" role="menu">
                 </ul>
             </ul>
@@ -183,10 +169,8 @@
         </div>
       </div>
     </div>
-<br><br><br>
-<div class="imghome">
-     <img src="static/images/automichome.png">
-</div>
+
+<div id="content">{% block content %}{% endblock %}</div>
 <div class="footer"></div>
 </body>
 </html>

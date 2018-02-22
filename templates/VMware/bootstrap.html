@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--
+      jQuery-menu-aim: this example uses Twitter's Bootstrap
+      (http://twitter.github.com/bootstrap) to setup a clean example page.
+      Search for "jQuery-menu-aim" in this page to find the jQuery-menu-aim
+      integration examples.
+    -->
+
+    <meta charset="utf-8">
+    <title>Safe-Networking</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/pan-logo-badge-green-dark-kick-up.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='css/bootstrap1.css') }}">
+    <style>
+      body {
+        padding-top: 30px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='css/bootstrap-responsive.css') }}">
+
+    <!--
+      jQuery-menu-aim: the following styles are used to customize bootstrap's
+      dropdowns and popover to play a little nicer w/ this example. They are
+      personal choices and not necessary for your use of jQuery-menu-aim.
+      jQuery-menu-aim is HTML/style-agnostic, it simply fires events when menu
+      items should be activated.
+      You can choose to do whatever you want w/ those events.
+    -->
+    <style>
+        .navbar .popover {
+            width: 400px;
+            -webkit-border-top-left-radius: 0px;
+            -webkit-border-bottom-left-radius: 0px;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+            overflow: hidden;
+        }
+        .navbar .popover-content {
+            text-align: center;
+        }
+        .navbar .popover-content img {
+            height: 212px;
+            max-width: 250px;
+        }
+        .navbar .dropdown-menu {
+            -webkit-border-top-right-radius: 0px;
+            -webkit-border-bottom-right-radius: 0px;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        .navbar .dropdown-menu > li > a:hover {
+            background-image: none;
+            color: white;
+            background-color: rgb(0, 129, 194);
+            background-color: rgba(0, 129, 194, 0.5);
+        }
+        .navbar .dropdown-menu > li > a.maintainHover {
+            color: white;
+            background-color: #0081C2;
+        }
+            .progressbar {
+                counter-reset: step;
+            }
+.progressbar li {
+    list-style: none;
+    display: inline-block;
+    width: 23.33%;
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+}
+.progressbar li:before {
+  content: counter(step);
+  counter-increment: step;
+  width: 30px;
+  height: 30px;
+  line-height : 30px;
+  border: 1px solid #ddd;
+  border-radius: 100%;
+  display: block;
+  text-align: center;
+  margin: 0 auto 10px auto;
+  background-color: #fff;
+}
+.progressbar li:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background-color: #ddd;
+  top: 15px;
+  left: -50%;
+  z-index : -1;
+}
+.progressbar li:first-child:after {
+  content: none;
+}
+.progressbar li.active {
+  color: green;
+}
+.progressbar li.active:before {
+  border-color: green;
+}
+.progressbar li.active + li:after {
+  background-color: green;
+}
+               .form-columns {
+                                           -webkit-column-count: 3; /* Chrome, Safari, Opera */
+                                           -moz-column-count: 3; /* Firefox */
+                                           column-count: 3;
+                                           width: 85%;
+                                           float: Left;
+                                              -webkit-column-gap: 40px; /* Chrome, Safari, Opera */
+                                             -moz-column-gap: 40px; /* Firefox */
+                                              column-gap: 40px;
+                    padding-left: 3cm;
+                   padding-right: 3cm;
+                              }
+                              .form-columns1 {
+                                           -webkit-column-count: 1; /* Chrome, Safari, Opera */
+                                           -moz-column-count: 1; /* Firefox */
+                                           column-count: 1;
+                                           width: 24.99999%;
+                                            -webkit-column-gap: 40px; /* Chrome, Safari, Opera */
+                                            -moz-column-gap: 40px; /* Firefox */
+                                           column-gap: 40px;
+                              }
+                              p.ex1 {
+                                  display: block;
+                                  margin-left: 1em;
+                                  float: right;
+                              }
+                              body {
+                                  padding-top: 30px; /* 60px to make the container go all the way to the bottom of the topbar */
+                              }
+                .container {
+            padding-left: 3cm;
+            padding-right: 3cm;
+        }
+        .container3 {
+	clear:left;
+	float:left;
+	width:100%;
+	overflow:hidden;
+}
+.container2 {
+	clear:left;
+	float:left;
+	width:100%;
+	position:relative;
+	right:33.333%;
+}
+.container0 {
+	float:left;
+	width:100%;
+	position:relative;
+	right:33.33%;
+
+}
+.col1 {
+	float:left;
+	width:29.33%;
+	position:relative;
+	left:68.67%;
+	overflow:hidden;
+    padding-left: 3cm;
+}
+.col2 {
+	float:left;
+	width:29.33%;
+	position:relative;
+	left:72.67%;
+	overflow:hidden;
+}
+.col3 {
+	float:left;
+	width:29.33%;
+	position:relative;
+	left:76.67%;
+	overflow:hidden;
+}
+    </style>
+
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="{{ url_for('static', filename = '/js/html5shiv.js') }}"></script>
+      <script src="/js/html5shiv.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <body>
+  {% extends "/VMware/base.html" %} {% block content %} {{pkg}}
+      <br><br>
+    <div class="container1">
+      <ul class="progressbar">
+        <li class="active">Build init-cfg.txt</li>
+          <li class="active">Build Bootstrap.xml</li>
+        <li>Build license</li>
+          <li>Download ISO</li>
+      </ul>
+    </div>
+<br><br>
+<div class="container3">
+<div class="container2">
+<div class="container0">
+
+
+  <form  action="/VMware/boot" method="post">
+    <div class="col1">
+
+      <label for="e1ip">Ethernet1/1:</label><input type="text" class="form-control" id="e1ip" name="e1ip" placeholder="192.168.2.1/24">
+      <label for="e1zone">Zone:</label><input type="text" class="form-control" id="e1zone" name="e1zone" placeholder="Internet">
+      <label for="e1inttype">Interface Type:</label><input type="text" class="form-control" id="e1inttype" name="e1inttype" placeholder="Layer3">
+      <label for="e1profile">Interface Profile:</label><input type="text" class="form-control" id="e1profile" name="e1profile" placeholder="PingSSHHTTPS">
+    </div>
+      <div class="col2">
+      <label for="e2ip">Ethernet1/2:</label><input type="text" class="form-control" id="e2ip" name="e2ip" placeholder="192.168.3.1/24">
+      <label for="e2zone">Zone:</label><input type="text" class="form-control" id="e2zone" name="e2zone" placeholder="Inside">
+      <label for="e2inttype">Interface Type:</label><input type="text" class="form-control" id="e2inttype" name="e2inttype" placeholder="Layer3">
+      <label for="e2profile">Interface Profile:</label><input type="text" class="form-control" id="e2profile" name="e2profile" placeholder="Allow Ping/SSH/HTTPS">
+      </div>
+      <div class="col3">
+      <label for="dfrdest">Default Route:</label><input type="text" class="form-control" id="dfrdest" name="dfrdest" placeholder="0.0.0.0/0">
+      <label for="dfrint">Default Route Interface:</label><input type="text" class="form-control" id="dfrint" name="dfrint" placeholder="Ethernet1/1">
+      <label for="dfrnh">Default Route Nexthop:</label><input type="text" class="form-control" id="dfrnh" name="dfrnh" placeholder="192.168.2.254">
+        <br>
+      <label for="AllowOut">Security Rule:</label><input type="text" class="form-control" id="AllowOut" name="AllowOut" placeholder="Allow Out">
+<br>
+      <button type="submit" class="btn btn-success">Generate Bootstrap File</button>
+     </div>
+  </form>
+
+  <br>
+</div>
+</div>
+</div>
+ {% endblock %}
+  </body>
+</html>
