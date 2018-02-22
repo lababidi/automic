@@ -142,6 +142,48 @@
         .container {
             padding-left: 3cm;
         }
+        .container3 {
+	clear:left;
+	float:left;
+	width:100%;
+	overflow:hidden;
+}
+.container2 {
+	clear:left;
+	float:left;
+	width:100%;
+	position:relative;
+	right:33.333%;
+}
+.container0 {
+	float:left;
+	width:100%;
+	position:relative;
+	right:33.33%;
+
+}
+.col1 {
+	float:left;
+	width:29.33%;
+	position:relative;
+	left:68.67%;
+	overflow:hidden;
+    padding-left: 3cm;
+}
+.col2 {
+	float:left;
+	width:29.33%;
+	position:relative;
+	left:72.67%;
+	overflow:hidden;
+}
+.col3 {
+	float:left;
+	width:29.33%;
+	position:relative;
+	left:76.67%;
+	overflow:hidden;
+}
     </style>
 
     <!--[if lt IE 9]>
@@ -164,22 +206,26 @@
       </ul>
     </div>
 <br><br>
-<div class="form-columns">
+<div class="container3">
+<div class="container2">
+<div class="container0">
 
 
   <form  action="/KVM/boot" method="post">
-    <div class="form-group">
+    <div class="col1">
 
       <label for="e1ip">Ethernet1/1:</label><input type="text" class="form-control" id="e1ip" name="e1ip" placeholder="192.168.2.1/24">
       <label for="e1zone">Zone:</label><input type="text" class="form-control" id="e1zone" name="e1zone" placeholder="Internet">
       <label for="e1inttype">Interface Type:</label><input type="text" class="form-control" id="e1inttype" name="e1inttype" placeholder="Layer3">
       <label for="e1profile">Interface Profile:</label><input type="text" class="form-control" id="e1profile" name="e1profile" placeholder="PingSSHHTTPS">
-<br>
+    </div>
+      <div class="col2">
       <label for="e2ip">Ethernet1/2:</label><input type="text" class="form-control" id="e2ip" name="e2ip" placeholder="192.168.3.1/24">
       <label for="e2zone">Zone:</label><input type="text" class="form-control" id="e2zone" name="e2zone" placeholder="Inside">
       <label for="e2inttype">Interface Type:</label><input type="text" class="form-control" id="e2inttype" name="e2inttype" placeholder="Layer3">
       <label for="e2profile">Interface Profile:</label><input type="text" class="form-control" id="e2profile" name="e2profile" placeholder="Allow Ping/SSH/HTTPS">
-<br>
+      </div>
+      <div class="col3">
       <label for="dfrdest">Default Route:</label><input type="text" class="form-control" id="dfrdest" name="dfrdest" placeholder="0.0.0.0/0">
       <label for="dfrint">Default Route Interface:</label><input type="text" class="form-control" id="dfrint" name="dfrint" placeholder="Ethernet1/1">
       <label for="dfrnh">Default Route Nexthop:</label><input type="text" class="form-control" id="dfrnh" name="dfrnh" placeholder="192.168.2.254">
@@ -192,6 +238,8 @@
 
   <br>
 
+</div>
+</div>
 </div>
 {% endblock %}
   </body>
