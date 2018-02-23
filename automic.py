@@ -5,16 +5,29 @@ import json
 import time
 from shutil import make_archive
 from flask import Flask, render_template, redirect, flash, request, session
-from flask import send_from_directory, jsonify, json
+from flask import send_from_directory, jsonify, json, url_for
 from pymongo import MongoClient
 from bson.objectid import ObjectId
+from werkzeug.utils import secure_filename
 from paths import *
 from isobuilder import iso_builder
 from forms import INITCFG, BOOTSTRAP, LICENSE, HEAT, ONAPHEAT, DEPLOY
 
 
+
 APP = Flask(__name__, static_folder='static')
 APP.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+ALLOWED_EXTENSIONS = set(['dms'])
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+APP.config['UPLOAD_FOLDER2'] = UPLOAD_FOLDER2
+APP.config['UPLOAD_FOLDER3'] = UPLOAD_FOLDER3
+APP.config['UPLOAD_FOLDER4'] = UPLOAD_FOLDER4
 
 CLIENT = MongoClient(MONGO_CLIENT)
 DB = CLIENT.MachineData
@@ -46,11 +59,76 @@ def template_test():
         return render_template('index.html', name=template_test)
 
 
-@APP.route('/automic', methods=['GET'])
-def automic():
-    """return main page"""
-    return render_template('automicexplosion.html')
+#@APP.route('/automic', methods=['GET'])
+#def automic():
+#    """return main page"""
+#    return render_template('automicexplosion.html')
 
+
+@APP.route('/content', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        if 'Content Udpate' not in request.files:
+            if 'Software Update' not in request.files:
+                flash('No file part')
+                return redirect(request.url)
+        try:
+            file = request.files['Content Update']
+            if file.filename == '':
+                flash('No selected file')
+                return redirect(request.url)
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(APP.config['UPLOAD_FOLDER'], filename))
+                return redirect(url_for('upload_file',
+                                        filename=filename))
+        except:
+            pass
+        try:
+            file2 = request.files['Software Update']
+            if file2.filename == '':
+                return redirect(request.url)
+            if file2 and allowed_file(file2.filename):
+                filename = secure_filename(file2.filename)
+                file2.save(os.path.join(APP.config['UPLOAD_FOLDER2'], filename))
+                return redirect(url_for('upload_file',
+                                        filename=filename))
+        except:
+            pass
+    return render_template('/KVM/package.html')
+
+
+@APP.route('/vmcontent', methods=['GET', 'POST'])
+def upload_filevm():
+    if request.method == 'POST':
+        if 'Content Update' not in request.files:
+            if 'Software Update' not in request.files:
+                flash('No file part')
+                return redirect(request.url)
+        try:
+            file3 = request.files['Content Update']
+            if file3.filename == '':
+                flash('No selected file')
+                return redirect(request.url)
+            if file3 and allowed_file(file3.filename):
+                filename = secure_filename(file3.filename)
+                file3.save(os.path.join(APP.config['UPLOAD_FOLDER3'], filename))
+                return redirect(url_for('upload_filevm',
+                                        filename=filename))
+        except:
+            pass
+        try:
+            file4 = request.files['Software Update']
+            if file4.filename == '':
+                return redirect(request.url)
+            if file4 and allowed_file(file4.filename):
+                filename = secure_filename(file4.filename)
+                file4.save(os.path.join(APP.config['UPLOAD_FOLDER4'], filename))
+                return redirect(url_for('upload_filevm',
+                                        filename=filename))
+        except:
+            pass
+    return render_template('/VMware/package.html')
 
 """KVM WORKFLOW"""
 
