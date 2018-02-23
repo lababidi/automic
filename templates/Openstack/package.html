@@ -118,6 +118,9 @@
 .progressbar li.active + li:after {
   background-color: green;
 }
+        .container {
+            padding-left: 3cm;
+        }
     </style>
     </head>
     <body>
@@ -138,7 +141,15 @@
     <div class="form-group">
 
 <br>
-      <button type="submit" class="btn btn-success">Deploy Firewall</button>
+      <button title="To build an instance in Openstack, source the openstack credentials
+
+source admin-openrc.sh
+
+pip install python-openstackclient
+
+Extract the zip package and cd to main directory, the run:
+
+'openstack --debug stack create panstack -f heat-template.yaml -e heat-environment.yaml'" class="btn btn-success">Deployment Information</button>
          </div>
         </form>
     </div>
